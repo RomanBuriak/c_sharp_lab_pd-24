@@ -1,4 +1,9 @@
 ﻿//Лаба 3 (1 завдання)
+//вивести логічне значення True,
+//якщо приведений вислів для запропонованих початкових даних є
+//істинним, і значення False у супротивному випадку.
+//Перевірити істинність вислову: &quot;Квадратне рівняння A·x 2 + B·x + C
+//= 0 із даними коефіцієнтами A, B, C має дійсні корені
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,16 +35,13 @@ namespace Lab_3
 
             if (d < 0)
             {
-                Console.WriteLine("True");
-            }
-            if (d > 0)
-            {
-                Console.WriteLine("True");
-            }
-            if (d == 0)
-            {
                 Console.WriteLine("False");
             }
+            if (d >= 0)
+            {
+                Console.WriteLine("True");
+            }
+
             Console.ReadKey();
         }
     }
