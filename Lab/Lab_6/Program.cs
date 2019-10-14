@@ -11,35 +11,64 @@ namespace Lab_6
     {
         static void Main(string[] args)
         {
-            int e, n;
+
             int sum_prost = 0;
             int rizn_parn = 0;
             int sum_parn = 0;
+            int arithmetic_mean;
 
+            int all_sum = 0;
 
-            Console.WriteLine("Enter the number of elements in the list:");
-            n = Convert.ToInt32(Console.ReadLine());
 
             List<int> elements = new List<int>();
 
 
+            string str;
 
-            for (int i = 0; i < n; i++)
+
+            Console.WriteLine("Enter list (Numeric values can be separated by a space.)");
+            Console.WriteLine("For example: 123 1113 208 75");
+            str = Console.ReadLine();
+            string[] str_arr = str.Split(' ');
+
+
+            int[] arr = new int[str.Length];
+
+            for (int i = 0; i < str_arr.Length; i++)
             {
-                Console.WriteLine("Enter element ({0}):", i);
-                e = Convert.ToInt32(Console.ReadLine());
-                elements.Add(e);
 
-                if (((e % 2) != 0 && (e % 3) != 0 && e != 1) || e == 2 || e == 3)
+                try
                 {
-                    sum_prost += e;
+                    arr[i] = Convert.ToInt32(str_arr[i]);
+
                 }
-
-                if ((e % 2) == 0)
+                catch (Exception e)
                 {
-                    sum_parn += e;
+                    Console.WriteLine(e.Message);
+                    Console.ReadKey();
+                    return;
                 }
             }
+
+            for (int i = 0; i < str_arr.Length; i++)
+            {
+
+                elements.Add(arr[i]);
+
+                if (((arr[i] % 2) != 0 && (arr[i] % 3) != 0 && arr[i] != 1) || arr[i] == 2 || arr[i] == 3)
+                {
+                    sum_prost += arr[i];
+                }
+
+                if ((arr[i] % 2) == 0)
+                {
+                    sum_parn += arr[i];
+                }
+
+                all_sum += arr[i];
+
+            }
+            arithmetic_mean = all_sum / str_arr.Length;
             rizn_parn = sum_prost - sum_parn;
 
 
@@ -57,7 +86,11 @@ namespace Lab_6
 
             Console.WriteLine("Sum simple elements = {0}", sum_prost);
 
+            Console.WriteLine("Sum paired elements = {0}", sum_parn);
+
             Console.WriteLine("Sum simple elements - Sum paired elements = {0}", rizn_parn);
+
+            Console.WriteLine("Arithmetic mean = {0}", arithmetic_mean);
 
 
 
