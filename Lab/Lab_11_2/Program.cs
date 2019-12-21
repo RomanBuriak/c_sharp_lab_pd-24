@@ -10,6 +10,7 @@ namespace Lab_11_2
 
     class Program
     {
+
         static void Main(string[] args)
         {
             List<Student> listStud = new List<Student>();
