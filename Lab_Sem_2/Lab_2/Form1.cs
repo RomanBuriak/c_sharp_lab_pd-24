@@ -15,6 +15,18 @@ namespace Lab_2
         public Form1()
         {
             InitializeComponent();
+            this.Timer1.Interval = 200;
+            this.Timer1.Tick += Timer1_Tick;
+            this.Timer1.Start();
+        }
+
+        string text = "12345";
+        bool on_or_off = true;
+        int i = 0;
+
+        private void Timer1_Tick(object sender, EventArgs e)
+        {
+
         }
     }
 }
