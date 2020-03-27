@@ -19,6 +19,8 @@ namespace Lab_2
         {
             InitializeComponent();
             this.MouseMove += Button_Move;
+            this.button1.MouseEnter += Button_OK_MouseEnter;
+            this.button1.TabStop = false;
             Text = " ";
             if (Timer1.Enabled)
             {
@@ -53,107 +55,119 @@ namespace Lab_2
             }
         }
 
+
         private void Button_Move(object sender, MouseEventArgs e)
         {
-            int speed = 2;
-            int field = 30;
-            int cursor_x = Cursor.Position.X;
-            int cursor_y = Cursor.Position.Y;
-            int button_x = button1.Location.X;
-            int button_y = button1.Location.Y;
-            //->
-            if (cursor_x - field >= button_x)
-            {
-                button1.Location = new System.Drawing.Point(button_x + speed, button_y);
-            }
-            //<-
-            if (cursor_x + button1.Width + field <= button_x)
-            {
-                button1.Location = new System.Drawing.Point(button_x - speed, button_y);
-            }
-            //down
-            if (cursor_y - field >= button_x)
-            {
-                button1.Location = new System.Drawing.Point(button_x, button_y + speed);
-            }
-            //up
-            if (cursor_y + button1.Height + field == button_x)
-            {
-                button1.Location = new System.Drawing.Point(button_x, button_y + speed);
-            }
-            //down and right
-            
             if (button1.Size.Width < 1 || button1.Size.Height < 1)
+            {
                 this.Text = "Кнопка “Ок” не може бути натиснута";
+            }
+                
+
+            int step_distance = 2;
+            int field_distance_from_the_button = 30;
+            int button_width = 100;
+            int button_height = 50;
+            int cursor_position_x = e.X;
+            int cursor_position_y = e.Y;
+            int button_position_x = button1.Location.X;
+            int button_position_y = button1.Location.Y;
             bool move = false;
 
-            bool Limit_X = e.X > button_x - field && e.X < button_x;//->
-            bool Limit_Y = e.Y > button_y - field && e.Y < button_y;//down
-            bool Limit_And_Size_Button_X = e.X > button_x - field + 100 && e.X < button_x + 100;//->
-            bool Limit_And_Size_Button_Y = e.Y > button_y - field + 50 && e.Y < button_y + 50;//
-            bool Limit_X_Revers = e.X > button_x && e.X < button_x - field + 100;//
-            bool Limit_Y_Revers = e.Y > button_y && e.Y < button_y - field + 50;//
-            if (Limit_X && Limit_Y)
+            if (cursor_position_x > button_position_x - field_distance_from_the_button && cursor_position_y > button_position_y - field_distance_from_the_button && cursor_position_x < button_position_x && cursor_position_y < button_position_y)
             {
-                this.button1.Location = new System.Drawing.Point(button_x + speed, button_y + speed);
-                move = true; counter++;
+                button1.Location = new Point(button_position_x + step_distance, button_position_y + step_distance);
+                move = true;
+                counter++;
+            }//field left top (move down and right)
+            else if (cursor_position_x < button_position_x + button_width && cursor_position_y > button_position_y - field_distance_from_the_button && cursor_position_x > button_position_x && cursor_position_y < button_position_y)
+            {
+                button1.Location = new Point(button_position_x, button_position_y + step_distance);
+                move = true;
+                counter++;
+            }//field top (move down)
+            else if(cursor_position_x < button_position_x + button_width + field_distance_from_the_button && cursor_position_y > button_position_y - field_distance_from_the_button && cursor_position_x > button_position_x + button_width && cursor_position_y < button_position_y)
+            {
+                button1.Location = new Point(button_position_x - step_distance, button_position_y + step_distance);
+                move = true;
+                counter++;
+            }//field right top (move down and left)
+            else if (cursor_position_x > button_position_x - field_distance_from_the_button && cursor_position_y < button_position_y + button_height && cursor_position_x < button_position_x && cursor_position_y > button_position_y)
+            {
+                button1.Location = new Point(button_position_x + step_distance, button_position_y);
+                move = true;
+                counter++;
+            }//field left (move right)
+            else if (cursor_position_x < button_position_x + button_width + field_distance_from_the_button && cursor_position_y < button_position_y + button_height && cursor_position_x > button_position_x + button_width && cursor_position_y > button_position_y)
+            {
+                button1.Location = new Point(button_position_x - step_distance, button_position_y);
+                move = true;
+                counter++;
+            }//field right (move left)
+            else if (cursor_position_x > button_position_x - field_distance_from_the_button && cursor_position_y < button_position_y + button_height + field_distance_from_the_button && cursor_position_x < button_position_x && cursor_position_y > button_position_y + button_height)
+            {
+                button1.Location = new Point(button_position_x + step_distance, button_position_y - step_distance);
+                move = true;
+                counter++;
+            }//field left bottom (move right and up)
+            else if (cursor_position_x < button_position_x + button_width && cursor_position_y < button_position_y + button_height + field_distance_from_the_button && cursor_position_x > button_position_x && cursor_position_y > button_position_y + button_height)
+            {
+                button1.Location = new Point(button_position_x, button_position_y - step_distance);
+                move = true;
+                counter++;
+            }//field bottom (move up)
+            else if (cursor_position_x < button_position_x + button_width + field_distance_from_the_button && cursor_position_y < button_position_y + button_height + field_distance_from_the_button && cursor_position_x > button_position_x + button_width && cursor_position_y > button_position_y + button_height)
+            {
+                button1.Location = new Point(button_position_x - step_distance, button_position_y - step_distance);
+                move = true;
+                counter++;
+            }//field right bottom (move left and up)
+
+
+
+
+
+            field_distance_from_the_button = 150;
+            if (button_position_x + button_width > this.Size.Width)
+            {
+                button_position_x -= field_distance_from_the_button;
+                button1.Location = new Point(button_position_x, button_position_y);
             }
-            else if (Limit_And_Size_Button_X && Limit_And_Size_Button_Y)
+            else if (button_position_y + button_height > this.Size.Height)
             {
-                this.button1.Location = new System.Drawing.Point(button_x - speed, button_y - speed);
-                move = true; counter++;
+                button_position_y -= field_distance_from_the_button;
+                button1.Location = new Point(button_position_x, button_position_y);
             }
-            else if (Limit_X && Limit_And_Size_Button_Y)
+            else if (button_position_x < 0)
             {
-                this.button1.Location = new System.Drawing.Point(button_x + speed, button_y - speed);
-                move = true; counter++;
+                button_position_x += field_distance_from_the_button;
+                button1.Location = new Point(button_position_x, button_position_y);
             }
-            else if (Limit_And_Size_Button_X && Limit_Y)
+            else if (button_position_y < 0)
             {
-                this.button1.Location = new System.Drawing.Point(button_x - speed, button_y + speed);
-                move = true; counter++;
-            }
-            else if (Limit_X_Revers && Limit_Y)
-            {
-                this.button1.Location = new System.Drawing.Point(button_x, button_y + speed);
-                move = true; counter++;
-            }
-            else if (Limit_X_Revers && Limit_And_Size_Button_Y)
-            {
-                this.button1.Location = new System.Drawing.Point(button_x, button_y - speed);
-                move = true; counter++;
-            }
-            else if (Limit_And_Size_Button_X && Limit_Y_Revers)
-            {
-                this.button1.Location = new System.Drawing.Point(button_x - speed, button_y);
-                move = true; counter++;
-            }
-            else if (Limit_X && Limit_Y_Revers)
-            {
-                this.button1.Location = new System.Drawing.Point(button_x + speed, button_y);
-                move = true; counter++;
+                button_position_y += field_distance_from_the_button;
+                button1.Location = new Point(button_position_x, button_position_y);
             }
 
 
 
-            //Край форми
-            field = 50;
-            if (button1.Location.X > this.Size.Width - 80)
-                button_x -= field;
-            else if (button1.Location.Y > this.Size.Height - 80)
-                button_y -= field;
-            else if (button1.Location.Y < 0)
-                button_y += field;
-            else if (button1.Location.X < 0)
-                button_x += field;
-            this.button1.Location = new System.Drawing.Point(button_x, button_y);
-
-            //Зменшння кнопки
-            if (move && counter % 10 == 0)
+            if (move && counter % 20 == 0)
             {
-                this.button1.Size = new System.Drawing.Size(button1.Width, --button1.Height);
+                this.button1.Size = new Size(button1.Width, --button1.Height);
             }
 
+        }
+
+        private void Button_OK_MouseEnter(object sender, EventArgs e)
+        {
+            Random rand = new Random();
+            int x = this.button1.Location.X;
+            int y = this.button1.Location.Y;
+            int delta = rand.Next(50, 100);
+            x = (x < this.Size.Width / 2 ? x -= delta : x += delta);
+            y = (y < this.Size.Height / 2 ? y -= delta : y += delta);
+
+            button1.Location = new Point(x, y);
         }
 
 
