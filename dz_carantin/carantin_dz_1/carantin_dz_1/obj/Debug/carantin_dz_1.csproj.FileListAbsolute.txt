@@ -1,0 +1,9 @@
+D:\MyProjects OnlyMe\carantin_dz_1\carantin_dz_1\bin\Debug\carantin_dz_1.exe.config
+D:\MyProjects OnlyMe\carantin_dz_1\carantin_dz_1\bin\Debug\carantin_dz_1.exe
+D:\MyProjects OnlyMe\carantin_dz_1\carantin_dz_1\bin\Debug\carantin_dz_1.pdb
+D:\MyProjects OnlyMe\carantin_dz_1\carantin_dz_1\obj\Debug\carantin_dz_1.csprojAssemblyReference.cache
+D:\MyProjects OnlyMe\carantin_dz_1\carantin_dz_1\obj\Debug\carantin_dz_1.Form1.resources
+D:\MyProjects OnlyMe\carantin_dz_1\carantin_dz_1\obj\Debug\carantin_dz_1.Properties.Resources.resources
+D:\MyProjects OnlyMe\carantin_dz_1\carantin_dz_1\obj\Debug\carantin_dz_1.csproj.GenerateResource.cache
+D:\MyProjects OnlyMe\carantin_dz_1\carantin_dz_1\obj\Debug\carantin_dz_1.exe
+D:\MyProjects OnlyMe\carantin_dz_1\carantin_dz_1\obj\Debug\carantin_dz_1.pdb
